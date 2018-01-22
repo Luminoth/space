@@ -1,0 +1,9 @@
+{
+    "name": "Space",
+    "references": [
+        "Core",
+        "Game"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": []
+}

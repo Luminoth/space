@@ -521,7 +521,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1172143870}
-  - component: {fileID: 1172143874}
+  - component: {fileID: 1172143873}
   - component: {fileID: 1172143872}
   - component: {fileID: 1172143871}
   m_Layer: 8
@@ -557,9 +557,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _collider: {fileID: 105099145}
-  _maxVelocity: 10
-  _acceleration: 1
+  _maxVelocity: 25
+  _acceleration: 5
   _targetVelocity: 0
+  _currentVelocity: 0
 --- !u!114 &1172143872
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -572,7 +573,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _contextMenuPrefabPath: Prefabs/UI/ContextMenu.prefab
---- !u!54 &1172143874
+--- !u!54 &1172143873
 Rigidbody:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}

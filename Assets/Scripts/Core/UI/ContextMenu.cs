@@ -1,5 +1,6 @@
 ﻿using System;
 
+using EnergonSoftware.Core.Input;
 using EnergonSoftware.Core.Util;
 
 using UnityEngine;
@@ -24,18 +25,25 @@ namespace EnergonSoftware.Core.UI
         [ReadOnly]
         private bool _active;
 
-        private void Update()
+#region Unity Lifecycle
+        private void Awake()
         {
-            if(!_active && Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1) || Input.GetMouseButtonDown(2)) {
-                Close();
+            InputManager.Instance.PointerDownEvent += PointerDownEventHandler;
+        }
+
+        private void OnDestroy()
+        {
+            if(InputManager.HasInstance) {
+                InputManager.Instance.PointerDownEvent -= PointerDownEventHandler;
             }
         }
+#endregion
 
         public void AddItem(string text, Action callback)
         {
             GameObject go = Instantiate(_contextMenuItemPrefab, _layout.transform, true);
-            ContextMenuItem item = go.GetComponent<ContextMenuItem>();
-            item.Initialize(this, text, callback);
+            ContextMenuItem item = go?.GetComponent<ContextMenuItem>();
+            item?.Initialize(this, text, callback);
         }
 
         public void AddSeparator()
@@ -52,6 +60,13 @@ namespace EnergonSoftware.Core.UI
         public void OnPointerExit(PointerEventData eventData)
         {
             _active = false;
+        }
+
+        private void PointerDownEventHandler(object sender, EventArgs args)
+        {
+            if(!_active) {
+                Close();
+            }
         }
 #endregion
     }

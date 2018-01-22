@@ -1,0 +1,8 @@
+{
+    "name": "com.energonsoftware.space.Game",
+    "references": [
+        "com.energonsoftware.space.Core"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": []
+}

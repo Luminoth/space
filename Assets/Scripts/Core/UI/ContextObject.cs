@@ -23,8 +23,6 @@ namespace EnergonSoftware.Core.UI
 
         private GameObject _contextMenuPrefab;
 
-        private ContextMenu _contextMenu;
-
         private readonly List<ContextObjectItem> _items = new List<ContextObjectItem>();
 
 #region Unity Lifecycle
@@ -51,12 +49,7 @@ namespace EnergonSoftware.Core.UI
                 return;
             }
 
-            if(null != _contextMenu) {
-                _contextMenu.transform.position = eventData.position;
-                return;
-            }
-
-            _contextMenu = ContextMenu.Create(_contextMenuPrefab,
+            ContextMenu.Create(_contextMenuPrefab,
                 contextMenu =>
                 {
                     foreach(ContextObjectItem item in _items) {
@@ -68,9 +61,6 @@ namespace EnergonSoftware.Core.UI
                     }
 
                     contextMenu.MoveTo(eventData.position);
-                },
-                () => {
-                    _contextMenu = null;
                 }
             );
         }

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-
-using EnergonSoftware.Core.UI;
+﻿using EnergonSoftware.Core.UI;
 using EnergonSoftware.Core.Util;
 
 using UnityEngine;
@@ -15,51 +13,55 @@ namespace EnergonSoftware.Space
         private Collider _collider;
 
         [SerializeField]
-        private float _maxVelocity = 10.0f;
+        private float _maxVelocity = 25.0f;
 
         [SerializeField]
-        private float _acceleration = 2.0f;
+        private float _acceleration = 5.0f;
 
         [SerializeField]
         [ReadOnly]
         private float _targetVelocity;
 
-        private Rigidbody _rigidBody;
+        private Rigidbody _rigidbody;
 
-        // NOTE: slow!
-        public float Velocity => _rigidBody.velocity.magnitude;
+        public float Velocity => _rigidbody.velocity.magnitude;
 
 #region Unity Lifecycle
         private void Awake()
         {
-            _rigidBody = GetComponent<Rigidbody>();
-            _rigidBody.useGravity = false;
+            _rigidbody = GetComponent<Rigidbody>();
+            _rigidbody.useGravity = false;
 
             ContextObject context = GetComponent<ContextObject>();
             context.AddItem("Show Info", () => {
                 Debug.Log("Show Ship Info!");
             });
 
-GameManager.Instance.PlayerShip = this;
-        }
-
-        private void Start()
-        {
-            StartCoroutine(VelocityMonitor());
+GameManager.Instance.SetPlayerShip(this);
         }
 
         private void OnDestroy()
         {
 if(GameManager.HasInstance) {
-    GameManager.Instance.PlayerShip = null;
+    GameManager.Instance.SetPlayerShip(null);
 }
+        }
+
+        private void FixedUpdate()
+        {
+            float dt = Time.fixedDeltaTime;
+
+            Accelerate(dt);
         }
 
         private void OnCollisionEnter(Collision collision)
         {
             Debug.Log($"Collision: {collision.transform.name}");
-            _rigidBody.velocity = Vector3.zero;
-            _targetVelocity = 0.0f;
+
+            Stop(true);
+
+            // TODO: actually bounce us back rather than throwing us back
+            transform.position -= transform.forward * 2.0f;
         }
 #endregion
 
@@ -69,22 +71,28 @@ if(GameManager.HasInstance) {
             _targetVelocity = _maxVelocity;
         }
 
-        private IEnumerator VelocityMonitor()
+        public void Stop(bool immediate=false)
         {
-            while(true) {
-                float currentVelocity = _rigidBody.velocity.magnitude;
-                if(Mathf.Approximately(currentVelocity, _targetVelocity)) {
-                    // good enough!
-                } else if(currentVelocity < _targetVelocity) {
-                    float amount = Mathf.Min(_acceleration, _targetVelocity - currentVelocity);
-                    _rigidBody.velocity += transform.forward * amount;
-                } else if(currentVelocity > _targetVelocity) {
-                    float amount = Mathf.Min(_acceleration, currentVelocity - _targetVelocity);
-                    _rigidBody.velocity += -transform.forward * amount;
-                }
-
-                yield return new WaitForSeconds(1.0f);
+            if(immediate) {
+                _rigidbody.velocity = Vector3.zero;
             }
+            _targetVelocity = 0.0f;
+        }
+
+        private void Accelerate(float dt)
+        {
+            float currentVelocity = Velocity;
+
+            if(Mathf.Approximately(currentVelocity, _targetVelocity)) {
+                currentVelocity = _targetVelocity;
+            } else if(currentVelocity < _targetVelocity) {
+                currentVelocity += _acceleration * dt;
+            } else if(currentVelocity > _targetVelocity) {
+                currentVelocity -= _acceleration * dt;
+            }
+
+            currentVelocity = Mathf.Clamp(currentVelocity, 0.0f, _maxVelocity);
+            _rigidbody.velocity = transform.forward * currentVelocity;
         }
     }
 }

@@ -98,7 +98,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Velocity: 0'
+  m_Text: 'Velocity: 0 m/s'
 --- !u!114 &114267436892415070
 MonoBehaviour:
   m_ObjectHideFlags: 1

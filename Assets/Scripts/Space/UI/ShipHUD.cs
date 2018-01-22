@@ -13,7 +13,7 @@ namespace EnergonSoftware.Space
 #region Unity Lifecycle
         private void Update()
         {
-            _velocityText.text = $"Velocity: {GameManager.Instance.PlayerShip.Velocity}";
+            _velocityText.text = $"Velocity: {(int)GameManager.Instance.PlayerShip.Velocity} m/s";
         }
 #endregion
     }

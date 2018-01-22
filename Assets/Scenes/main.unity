@@ -222,8 +222,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92cdd0a02728b3046b8db1f6fe84f99a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _orbit: 0
-  _orbitSpeed: 100
+  _orbit: 1
+  _orbitSpeedX: 100
+  _orbitSpeedY: 100
   _zoom: 1
   _minDistance: 5
   _maxDistance: 100
@@ -231,8 +232,8 @@ MonoBehaviour:
   _invertZoomDirection: 1
   _target: {fileID: 0}
   _targetCollider: {fileID: 0}
-  _distance: 25
-  _lastMousePosition: {x: 0, y: 0, z: 0}
+  _orbitAxis: {x: 0, y: 0}
+  _orbitRadius: 25
 --- !u!1 &688158871
 GameObject:
   m_ObjectHideFlags: 0

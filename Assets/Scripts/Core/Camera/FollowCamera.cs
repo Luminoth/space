@@ -12,7 +12,10 @@ namespace EnergonSoftware.Core.Camera
         private bool _orbit = true;
 
         [SerializeField]
-        private float _orbitSpeed = 100.0f;
+        private float _orbitSpeedX = 100.0f;
+
+        [SerializeField]
+        private float _orbitSpeedY = 100.0f;
 
         [SerializeField]
         private bool _zoom = true;
@@ -44,41 +47,22 @@ namespace EnergonSoftware.Core.Camera
 
         [SerializeField]
         [ReadOnly]
-        private float _distance = 25.0f;
+        private Vector2 _orbitAxis;
 
         [SerializeField]
         [ReadOnly]
-        private Vector3 _lastMousePosition;
+        private float _orbitRadius = 25.0f;
 
 #region Unity Lifecycle
         private void Update()
         {
-            if(null == Target) {
-                return;
-            }
-
             float dt = Time.deltaTime;
-
-            Vector3 currentMousePosition = UnityEngine.Input.mousePosition;
-            if(_orbit && UnityEngine.Input.GetMouseButton(0)) {
-                OrbitTarget(currentMousePosition - _lastMousePosition, dt);
-            }
-            _lastMousePosition = currentMousePosition;
-
-            if(_zoom) {
-                ZoomOnTarget(UnityEngine.Input.GetAxis("Mouse ScrollWheel"), dt);
-            }
+            OrbitTarget(dt);
         }
 
         private void LateUpdate()
         {
-            if(null == Target) {
-                return;
-            }
-
-            // fix our direction/distance (immediate)
-            transform.LookAt(Target.transform);
-            transform.position = Target.transform.position - (_distance * transform.forward);
+            FollowTarget();
         }
 #endregion
 
@@ -88,24 +72,40 @@ namespace EnergonSoftware.Core.Camera
             _targetCollider = target?.GetComponentInChildren<Collider>();   // :(
         }
 
-        private void OrbitTarget(Vector3 amount, float dt)
+        private void OrbitTarget(float dt)
         {
-            amount *= _orbitSpeed * dt;
-            transform.position += amount;
+            if(null == Target) {
+                return;
+            }
+
+            if(_orbit && UnityEngine.Input.GetMouseButton(0)) {
+                _orbitAxis.x += UnityEngine.Input.GetAxis("Mouse X") * _orbitSpeedX * dt;
+                _orbitAxis.y -= UnityEngine.Input.GetAxis("Mouse Y") * _orbitSpeedY * dt;
+            }
+
+            if(_zoom) {
+                float zoomAmount = UnityEngine.Input.GetAxis("Mouse ScrollWheel") * _zoomSpeed * dt * (_invertZoomDirection ? -1 : 1);
+
+                // avoid zooming into the object
+                Vector3 closestBoundsPoint = _targetCollider?.ClosestPointOnBounds(transform.position) ?? Target.transform.position;
+                float distanceToPoint = (closestBoundsPoint - Target.transform.position).magnitude;
+
+                float minDistance = _minDistance + distanceToPoint;
+                float maxDistance = _maxDistance + distanceToPoint;
+
+                _orbitRadius = Mathf.Clamp(_orbitRadius + zoomAmount, minDistance, maxDistance);
+            }
         }
 
-        private void ZoomOnTarget(float amount, float dt)
+        private void FollowTarget()
         {
-            amount *= _zoomSpeed * dt * (_invertZoomDirection ? -1 : 1);
+            if(null == Target) {
+                return;
+            }
 
-            // avoid zooming into the object
-            Vector3 closestBoundsPoint = _targetCollider?.ClosestPointOnBounds(transform.position) ?? Target?.transform.position ?? Vector3.zero;
-            float distanceToPoint = (closestBoundsPoint - (Target?.transform.position ?? Vector3.zero)).magnitude;
-
-            float minDistance = _minDistance + distanceToPoint;
-            float maxDistance = _maxDistance + distanceToPoint;
-
-            _distance = Mathf.Clamp(_distance + amount, minDistance, maxDistance);
+            Quaternion rotation = Quaternion.Euler(_orbitAxis.y, _orbitAxis.x, 0.0f);
+            transform.rotation = rotation;
+            transform.position = Target.transform.position + rotation * new Vector3(0.0f, 0.0f, -_orbitRadius);
         }
     }
 }

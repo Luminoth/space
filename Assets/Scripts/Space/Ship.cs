@@ -1,6 +1,8 @@
 ﻿using EnergonSoftware.Core.UI;
 using EnergonSoftware.Core.Util;
 
+using JetBrains.Annotations;
+
 using UnityEngine;
 
 namespace EnergonSoftware.Space
@@ -23,6 +25,7 @@ namespace EnergonSoftware.Space
 
         [SerializeField]
         [ReadOnly]
+        [CanBeNull]
         private Transform _target;
 
         [SerializeField]
@@ -63,14 +66,7 @@ if(GameManager.HasInstance) {
         {
             float dt = Time.fixedDeltaTime;
 
-            if(null != _target) {
-                Vector3 lookAt = _target.position - transform.position;
-                float step = _rotationSpeed * dt;
-
-                Vector3 rotated = Vector3.RotateTowards(transform.forward, lookAt, step, 0.0f);
-                transform.rotation = Quaternion.LookRotation(rotated);
-            }
-
+            RotateTowardsTarget(dt);
             Accelerate(dt);
         }
 
@@ -100,6 +96,19 @@ if(GameManager.HasInstance) {
                 _rigidbody.velocity = Vector3.zero;
             }
             _targetVelocity = 0.0f;
+        }
+
+        private void RotateTowardsTarget(float dt)
+        {
+            if(null == _target) {
+                return;
+            }
+
+            Vector3 lookAt = _target.position - transform.position;
+            float step = _rotationSpeed * dt;
+
+            Vector3 rotated = Vector3.RotateTowards(transform.forward, lookAt, step, 0.0f);
+            transform.rotation = Quaternion.LookRotation(rotated);
         }
 
         private void Accelerate(float dt)

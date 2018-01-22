@@ -19,6 +19,13 @@ namespace EnergonSoftware.Space
         private float _acceleration = 5.0f;
 
         [SerializeField]
+        private float _rotationSpeed = 0.5f;
+
+        [SerializeField]
+        [ReadOnly]
+        private Transform _target;
+
+        [SerializeField]
         [ReadOnly]
         private float _targetVelocity;
 
@@ -47,9 +54,22 @@ if(GameManager.HasInstance) {
 }
         }
 
+        private void OnDrawGizmos()
+        {
+            Debug.DrawLine(transform.position, transform.position + (transform.forward * 25.0f), Color.red);
+        }
+
         private void FixedUpdate()
         {
             float dt = Time.fixedDeltaTime;
+
+            if(null != _target) {
+                Vector3 lookAt = _target.position - transform.position;
+                float step = _rotationSpeed * dt;
+
+                Vector3 rotated = Vector3.RotateTowards(transform.forward, lookAt, step, 0.0f);
+                transform.rotation = Quaternion.LookRotation(rotated);
+            }
 
             Accelerate(dt);
         }
@@ -65,9 +85,12 @@ if(GameManager.HasInstance) {
         }
 #endregion
 
-        public void Approach(Vector3 position)
+        public void Approach(Transform target)
         {
-            transform.LookAt(position);
+            // TODO: might make more sense to approach the closest point
+            // on the target's collider (which changes over time)
+            // for a smoother ride in (need to test this idea out)
+            _target = target;
             _targetVelocity = _maxVelocity;
         }
 

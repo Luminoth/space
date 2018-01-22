@@ -423,7 +423,7 @@ Prefab:
     - target: {fileID: 224675204092754200, guid: 0db9a6981cad4d74ead1f178846f6bdb,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0db9a6981cad4d74ead1f178846f6bdb, type: 2}
@@ -559,8 +559,9 @@ MonoBehaviour:
   _collider: {fileID: 105099145}
   _maxVelocity: 25
   _acceleration: 5
+  _rotationSpeed: 0.5
+  _target: {fileID: 0}
   _targetVelocity: 0
-  _currentVelocity: 0
 --- !u!114 &1172143872
 MonoBehaviour:
   m_ObjectHideFlags: 0

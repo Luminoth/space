@@ -17,7 +17,7 @@ namespace EnergonSoftware.Space
             ContextObject context = GetComponent<ContextObject>();
             context.AddItem("Approach", () => {
                 Debug.Log("Approach Station!");
-                GameManager.Instance.PlayerShip.Approach(transform.position);
+                GameManager.Instance.PlayerShip.Approach(transform);
             });
             context.AddSeparator();
             context.AddItem("Show Info", () => {

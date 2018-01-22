@@ -11,7 +11,7 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: DefaultCompany
+  companyName: Energon Software
   productName: space
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
@@ -157,10 +157,13 @@ PlayerSettings:
   resolutionScalingMode: 0
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
-  applicationIdentifier: {}
+  applicationIdentifier:
+    Android: com.energonsoftware.space
+    Standalone: com.energonsoftware.space
+    iOS: com.energonsoftware.space
   buildNumber: {}
   AndroidBundleVersionCode: 1
-  AndroidMinSdkVersion: 16
+  AndroidMinSdkVersion: 24
   AndroidTargetSdkVersion: 0
   AndroidPreferredInstallLocation: 1
   aotOptions: 
@@ -259,7 +262,21 @@ PlayerSettings:
   m_BuildTargetIcons: []
   m_BuildTargetBatching: []
   m_BuildTargetGraphicsAPIs: []
-  m_BuildTargetVRSettings: []
+  m_BuildTargetVRSettings:
+  - m_BuildTarget: Android
+    m_Enabled: 1
+    m_Devices:
+    - daydream
+    - cardboard
+  - m_BuildTarget: Standalone
+    m_Enabled: 1
+    m_Devices:
+    - Oculus
+    - OpenVR
+  - m_BuildTarget: iOS
+    m_Enabled: 1
+    m_Devices:
+    - cardboard
   m_BuildTargetEnableVuforiaSettings: []
   openGLRequireES31: 0
   openGLRequireES31AEP: 0
@@ -292,7 +309,7 @@ PlayerSettings:
   enableInternalProfiler: 0
   logObjCUncaughtExceptions: 1
   enableCrashReportAPI: 0
-  cameraUsageDescription: 
+  cameraUsageDescription: Used to scan QR codes
   locationUsageDescription: 
   microphoneUsageDescription: 
   switchNetLibKey: 
@@ -551,7 +568,8 @@ PlayerSettings:
   webGLCompressionFormat: 1
   scriptingDefineSymbols: {}
   platformArchitecture: {}
-  scriptingBackend: {}
+  scriptingBackend:
+    Android: 1
   incrementalIl2cppBuild: {}
   additionalIl2CppArgs: 
   scriptingRuntimeVersion: 1
@@ -633,7 +651,7 @@ PlayerSettings:
   cloudServicesEnabled:
     UNet: 1
   facebookSdkVersion: 7.9.4
-  apiCompatibilityLevel: 2
+  apiCompatibilityLevel: 3
   cloudProjectId: f1340aff-9454-4aab-99ad-875b2b031fcf
   projectName: space
   organizationId: luminoth

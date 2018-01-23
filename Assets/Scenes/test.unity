@@ -238,7 +238,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b2e3cf2c246ff74b92868ca1a4aaf0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _contextMenuPrefabPath: Prefabs/UI/ContextMenu.prefab
 --- !u!4 &178508903
 Transform:
   m_ObjectHideFlags: 0
@@ -293,7 +292,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b2e3cf2c246ff74b92868ca1a4aaf0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _contextMenuPrefabPath: Prefabs/UI/ContextMenu.prefab
 --- !u!4 &459014850
 Transform:
   m_ObjectHideFlags: 0
@@ -423,7 +421,7 @@ Prefab:
     - target: {fileID: 224675204092754200, guid: 0db9a6981cad4d74ead1f178846f6bdb,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0db9a6981cad4d74ead1f178846f6bdb, type: 2}
@@ -573,7 +571,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b2e3cf2c246ff74b92868ca1a4aaf0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _contextMenuPrefabPath: Prefabs/UI/ContextMenu.prefab
 --- !u!54 &1172143873
 Rigidbody:
   m_ObjectHideFlags: 0

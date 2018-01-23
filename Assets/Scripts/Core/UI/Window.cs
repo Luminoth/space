@@ -27,6 +27,21 @@ namespace EnergonSoftware.Core.UI
 
         protected Action DestroyCallback { get; private set; }
 
+#region Unity Lifecycle
+        private void Awake()
+        {
+            Canvas canvas = GetComponent<Canvas>();
+            if(RenderMode.WorldSpace == canvas.renderMode) {
+                canvas.worldCamera = UIManager.Instance.UICamera;
+            }
+        }
+
+        private void OnDestroy()
+        {
+            DestroyCallback?.Invoke();
+        }
+#endregion
+
         public void MoveTo(Vector2 position)
         {
             _panel.position = position;
@@ -36,12 +51,5 @@ namespace EnergonSoftware.Core.UI
         {
             Destroy(gameObject);
         }
-
-#region Unity Lifecycle
-        private void OnDestroy()
-        {
-            DestroyCallback?.Invoke();
-        }
-#endregion
     }
 }

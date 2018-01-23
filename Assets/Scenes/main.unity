@@ -349,6 +349,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _contextMenuPrefabPath: Prefabs/UI/ContextMenu.prefab
+  _uiCamera: {fileID: 592309788}
   _uiContainer: {fileID: 0}
 --- !u!114 &688158875
 MonoBehaviour:
@@ -409,7 +410,7 @@ MonoBehaviour:
   _minZoomDistance: 5
   _maxZoomDistance: 100
   _zoomSpeed: 500
-  _invertZoomDirection: 0
+  _invertZoomDirection: 1
   _enableLook: 1
   _lookSpeedX: 100
   _lookSpeedY: 100
@@ -517,16 +518,16 @@ Prefab:
     - target: {fileID: 114000010349995660, guid: 34c21f523e72f45509a4e37ed0293c3b,
         type: 2}
       propertyPath: maxLaserDistance
-      value: 1
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 114000010349995660, guid: 34c21f523e72f45509a4e37ed0293c3b,
         type: 2}
       propertyPath: shrinkLaser
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 573655681, guid: 34c21f523e72f45509a4e37ed0293c3b, type: 2}
       propertyPath: raycastMode
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 573655681, guid: 34c21f523e72f45509a4e37ed0293c3b, type: 2}
       propertyPath: overrideCameraRayIntersectionDistance

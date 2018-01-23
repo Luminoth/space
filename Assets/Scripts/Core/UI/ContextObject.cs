@@ -31,6 +31,7 @@ namespace EnergonSoftware.Core.UI
 #region Event Handlers
         public void OnPointerClick(PointerEventData eventData)
         {
+UnityEngine.Debug.Log($"pointer click: {eventData.button}");
             if(PointerEventData.InputButton.Right != eventData.button) {
                 return;
             }

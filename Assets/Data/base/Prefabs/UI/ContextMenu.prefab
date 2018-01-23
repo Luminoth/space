@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 224748325643570266}
   - component: {fileID: 223493441484323596}
   - component: {fileID: 114404882252673148}
-  - component: {fileID: 114993048783338714}
+  - component: {fileID: 114113760398457552}
   - component: {fileID: 114003104054679762}
   m_Layer: 5
   m_Name: ContextMenu
@@ -67,6 +67,22 @@ MonoBehaviour:
   _contextMenuItemSeparatorPrefab: {fileID: 1830666084372140, guid: c4bb7f5df4c80fb4d911adb4e35d5855,
     type: 2}
   _active: 0
+--- !u!114 &114113760398457552
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1964078452447134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 739800cd36aba44e9b04ce977e5784bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ignoreReversedGraphics: 1
+  blockingObjects: 0
+  blockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!114 &114195858688137666
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -150,22 +166,6 @@ MonoBehaviour:
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 0
   m_ChildControlHeight: 0
---- !u!114 &114993048783338714
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1964078452447134}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1301386320, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
-  m_BlockingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
 --- !u!222 &222394615562017778
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -180,7 +180,7 @@ Canvas:
   m_GameObject: {fileID: 1964078452447134}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 2
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0

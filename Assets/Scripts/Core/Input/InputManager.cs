@@ -24,6 +24,7 @@ namespace EnergonSoftware.Core.Input
         private void Update()
         {
             if(UnityEngine.Input.GetMouseButtonDown(0)) {
+Debug.Log("left click");
                 PointerDownEvent?.Invoke(null, new PointerEventArgs
                 {
                     PointerPosition = UnityEngine.Input.mousePosition,
@@ -32,6 +33,7 @@ namespace EnergonSoftware.Core.Input
             }
 
             if(UnityEngine.Input.GetMouseButtonDown(1)) {
+Debug.Log("right click");
                 PointerDownEvent?.Invoke(null, new PointerEventArgs
                 {
                     PointerPosition = UnityEngine.Input.mousePosition,
@@ -40,6 +42,7 @@ namespace EnergonSoftware.Core.Input
             }
 
             if(UnityEngine.Input.GetMouseButtonDown(2)) {
+Debug.Log("middle click");
                 PointerDownEvent?.Invoke(null, new PointerEventArgs
                 {
                     PointerPosition = UnityEngine.Input.mousePosition,

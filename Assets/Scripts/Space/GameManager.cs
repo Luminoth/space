@@ -16,6 +16,9 @@ namespace EnergonSoftware.Space
         public Camera MainCamera => _mainCamera;
 
         [SerializeField]
+        private FollowCamera _followCamera;
+
+        [SerializeField]
         [ReadOnly]
         private Ship _playerShip;
 
@@ -24,7 +27,7 @@ namespace EnergonSoftware.Space
         public void SetPlayerShip(Ship playerShip)
         {
             _playerShip = playerShip;
-            MainCamera.GetComponent<FollowCamera>().SetTarget(PlayerShip.gameObject);
+            _followCamera.SetTarget(PlayerShip.gameObject);
         }
 
 #region Unity Lifecycle
@@ -54,11 +57,11 @@ namespace EnergonSoftware.Space
                     {
                         contextMenu.AddItem("Free Look", () => {
                             Debug.Log("UI: Free look enabled");
-                            MainCamera.GetComponent<FollowCamera>().SetTarget(null);
+                            _followCamera.SetTarget(null);
                         });
                         contextMenu.AddItem("Follow My Ship", () => {
                             Debug.Log("UI: Following ship");
-                            MainCamera.GetComponent<FollowCamera>().SetTarget(PlayerShip.gameObject);
+                            _followCamera.SetTarget(PlayerShip.gameObject);
                         });
 
                         contextMenu.MoveTo(args.PointerPosition);

@@ -16,12 +16,12 @@ namespace EnergonSoftware.Space
         {
             ContextObject context = GetComponent<ContextObject>();
             context.AddItem("Approach", () => {
-                Debug.Log("Approach Station!");
+                Debug.Log($"UI: Approaching station {name}");
                 GameManager.Instance.PlayerShip.Approach(transform);
             });
             context.AddSeparator();
             context.AddItem("Show Info", () => {
-                Debug.Log("Show Station Info!");
+                Debug.Log("TODO: Show Station Info!");
             });
         }
 #endregion

@@ -1,10 +1,8 @@
 using System;
 using System.Collections.Generic;
 
-using EnergonSoftware.Core.Assets;
 using EnergonSoftware.Core.Util;
 
-using UnityEngine;
 using UnityEngine.EventSystems;
 
 namespace EnergonSoftware.Core.UI
@@ -18,19 +16,7 @@ namespace EnergonSoftware.Core.UI
             public bool isSeparator;
         }
 
-        [SerializeField]
-        private string _contextMenuPrefabPath = "Prefabs/UI/ContextMenu.prefab";
-
-        private GameObject _contextMenuPrefab;
-
         private readonly List<ContextObjectItem> _items = new List<ContextObjectItem>();
-
-#region Unity Lifecycle
-        private void Awake()
-        {
-            _contextMenuPrefab = AssetManager.Instance.LoadPrefab(_contextMenuPrefabPath);
-        }
-#endregion
 
         public void AddItem(string text, Action callback)
         {
@@ -49,7 +35,7 @@ namespace EnergonSoftware.Core.UI
                 return;
             }
 
-            ContextMenu.Create(_contextMenuPrefab,
+            ContextMenu.Create(UIManager.Instance.ContextMenuPrefab,
                 contextMenu =>
                 {
                     foreach(ContextObjectItem item in _items) {

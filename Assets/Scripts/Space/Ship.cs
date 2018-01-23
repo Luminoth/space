@@ -44,7 +44,7 @@ namespace EnergonSoftware.Space
 
             ContextObject context = GetComponent<ContextObject>();
             context.AddItem("Show Info", () => {
-                Debug.Log("Show Ship Info!");
+                Debug.Log("TODO: Show Ship Info!");
             });
 
 GameManager.Instance.SetPlayerShip(this);
@@ -72,8 +72,6 @@ if(GameManager.HasInstance) {
 
         private void OnCollisionEnter(Collision collision)
         {
-            Debug.Log($"Collision: {collision.transform.name}");
-
             Stop(true);
 
             // TODO: actually bounce us back rather than throwing us back

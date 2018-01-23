@@ -190,7 +190,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 592309785}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -222,18 +222,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92cdd0a02728b3046b8db1f6fe84f99a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _orbit: 1
+  _enableOrbit: 1
   _orbitSpeedX: 100
   _orbitSpeedY: 100
-  _zoom: 1
-  _minDistance: 5
-  _maxDistance: 100
+  _enableZoom: 1
+  _minZoomDistance: 5
+  _maxZoomDistance: 100
   _zoomSpeed: 500
   _invertZoomDirection: 1
+  _enableLook: 1
+  _lookSpeedX: 100
+  _lookSpeedY: 100
   _target: {fileID: 0}
   _targetCollider: {fileID: 0}
-  _orbitAxis: {x: 0, y: 0}
+  _orbitRotation: {x: 0, y: 0}
   _orbitRadius: 25
+  _lookRotation: {x: 0, y: 0}
 --- !u!1 &688158871
 GameObject:
   m_ObjectHideFlags: 0

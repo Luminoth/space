@@ -1,7 +1,10 @@
 ﻿using EnergonSoftware.Core.Camera;
+using EnergonSoftware.Core.Input;
+using EnergonSoftware.Core.UI;
 using EnergonSoftware.Core.Util;
 
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace EnergonSoftware.Space
 {
@@ -13,6 +16,7 @@ namespace EnergonSoftware.Space
         public Camera MainCamera => _mainCamera;
 
         [SerializeField]
+        [ReadOnly]
         private Ship _playerShip;
 
         public Ship PlayerShip => _playerShip;
@@ -20,7 +24,48 @@ namespace EnergonSoftware.Space
         public void SetPlayerShip(Ship playerShip)
         {
             _playerShip = playerShip;
-            _mainCamera?.GetComponent<FollowCamera>()?.SetTarget(_playerShip?.gameObject);
+            MainCamera.GetComponent<FollowCamera>().SetTarget(PlayerShip.gameObject);
         }
+
+#region Unity Lifecycle
+        private void Awake()
+        {
+            InputManager.Instance.PointerDownEvent += PointerDownEventHandler;
+        }
+
+        protected override void OnDestroy()
+        {
+            if(InputManager.HasInstance) {
+                InputManager.Instance.PointerDownEvent -= PointerDownEventHandler;
+            }
+        }
+#endregion
+
+#region Event Handlers
+        private void PointerDownEventHandler(object sender, InputManager.PointerEventArgs args)
+        {
+            if(PointerEventData.InputButton.Right != args.Button) {
+                return;
+            }
+
+            if(!Physics.Raycast(MainCamera.ScreenPointToRay(args.PointerPosition))) {
+                Core.UI.ContextMenu.Create(UIManager.Instance.ContextMenuPrefab,
+                    contextMenu =>
+                    {
+                        contextMenu.AddItem("Free Look", () => {
+                            Debug.Log("UI: Free look enabled");
+                            MainCamera.GetComponent<FollowCamera>().SetTarget(null);
+                        });
+                        contextMenu.AddItem("Follow My Ship", () => {
+                            Debug.Log("UI: Following ship");
+                            MainCamera.GetComponent<FollowCamera>().SetTarget(PlayerShip.gameObject);
+                        });
+
+                        contextMenu.MoveTo(args.PointerPosition);
+                    }
+                );
+            }
+        }
+#endregion
     }
 }

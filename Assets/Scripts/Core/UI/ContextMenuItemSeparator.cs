@@ -4,7 +4,7 @@ using UnityEngine.UI;
 namespace EnergonSoftware.Core.UI
 {
     [RequireComponent(typeof(LayoutElement))]
-    public class ContextMenuItemSeparator : MonoBehaviour
+    public sealed class ContextMenuItemSeparator : MonoBehaviour
     {
     }
 }

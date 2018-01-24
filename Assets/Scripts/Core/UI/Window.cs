@@ -28,23 +28,27 @@ namespace EnergonSoftware.Core.UI
         protected Action DestroyCallback { get; private set; }
 
 #region Unity Lifecycle
-        private void Awake()
+        protected virtual void Awake()
         {
             Canvas canvas = GetComponent<Canvas>();
             if(RenderMode.WorldSpace == canvas.renderMode) {
                 canvas.worldCamera = UIManager.Instance.UICamera;
+                transform.localScale = new Vector3(0.01f, 0.01f, 0.01f);
             }
         }
 
-        private void OnDestroy()
+        protected virtual void OnDestroy()
         {
             DestroyCallback?.Invoke();
         }
 #endregion
 
-        public void MoveTo(Vector2 position)
+        public void MoveTo(Vector3 position, bool lookAtCamera=true)
         {
-            _panel.position = position;
+            transform.position = position;
+            if(lookAtCamera) {
+                transform.forward = UIManager.Instance.UICamera.transform.forward;
+            }
         }
 
         public void Close()

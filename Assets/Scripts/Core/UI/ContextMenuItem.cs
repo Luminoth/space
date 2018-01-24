@@ -7,7 +7,7 @@ using UnityEngine.UI;
 namespace EnergonSoftware.Core.UI
 {
     [RequireComponent(typeof(LayoutElement))]
-    public class ContextMenuItem : MonoBehaviour, IPointerClickHandler
+    public sealed class ContextMenuItem : MonoBehaviour, IPointerClickHandler
     {
         [SerializeField]
         private Text _text;

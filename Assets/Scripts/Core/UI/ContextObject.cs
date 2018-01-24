@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 
 namespace EnergonSoftware.Core.UI
 {
-    public class ContextObject : MonoBehavior, IPointerClickHandler
+    public sealed class ContextObject : MonoBehavior, IPointerClickHandler
     {
         private struct ContextObjectItem
         {
@@ -31,8 +31,8 @@ namespace EnergonSoftware.Core.UI
 #region Event Handlers
         public void OnPointerClick(PointerEventData eventData)
         {
-UnityEngine.Debug.Log($"pointer click: {eventData.button}");
-            if(PointerEventData.InputButton.Right != eventData.button) {
+UnityEngine.Debug.Log($"obj pointer click: {eventData.button}: {name}");
+            if(!Config.UseVR && PointerEventData.InputButton.Right != eventData.button) {
                 return;
             }
 
@@ -47,6 +47,7 @@ UnityEngine.Debug.Log($"pointer click: {eventData.button}");
                         }
                     }
 
+UnityEngine.Debug.Log($"obj moving context menu to {eventData.position}");
                     contextMenu.MoveTo(eventData.position);
                 }
             );

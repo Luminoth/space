@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace EnergonSoftware.Core.Camera
 {
-    public class FollowCamera : MonoBehavior
+    public sealed class FollowCamera : MonoBehavior
     {
 #region Orbit Config
         [SerializeField]

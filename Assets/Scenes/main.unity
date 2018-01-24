@@ -204,7 +204,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: 0.01
   far clip plane: 1000
   field of view: 60
   orthographic: 0
@@ -398,7 +398,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 816069690}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 92cdd0a02728b3046b8db1f6fe84f99a, type: 3}
   m_Name: 
@@ -518,7 +518,7 @@ Prefab:
     - target: {fileID: 114000010349995660, guid: 34c21f523e72f45509a4e37ed0293c3b,
         type: 2}
       propertyPath: maxLaserDistance
-      value: 20
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114000010349995660, guid: 34c21f523e72f45509a4e37ed0293c3b,
         type: 2}
@@ -527,11 +527,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 573655681, guid: 34c21f523e72f45509a4e37ed0293c3b, type: 2}
       propertyPath: raycastMode
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 573655681, guid: 34c21f523e72f45509a4e37ed0293c3b, type: 2}
       propertyPath: overrideCameraRayIntersectionDistance
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 573655681, guid: 34c21f523e72f45509a4e37ed0293c3b, type: 2}
+      propertyPath: maxPointerDistance
+      value: 5000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 34c21f523e72f45509a4e37ed0293c3b, type: 2}

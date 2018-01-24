@@ -22,8 +22,8 @@ GameObject:
   - component: {fileID: 223012695276656820}
   - component: {fileID: 114423499342141712}
   - component: {fileID: 114631508640269374}
-  - component: {fileID: 114925964635700636}
   - component: {fileID: 114746030682598584}
+  - component: {fileID: 114925964635700636}
   m_Layer: 5
   m_Name: Ship HUD
   m_TagString: Untagged

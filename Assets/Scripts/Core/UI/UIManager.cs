@@ -24,6 +24,11 @@ namespace EnergonSoftware.Core.UI
 
         public GameObject UIContainer => _uiContainer;
 
+        [SerializeField]
+        private float _uiSpawnDistance = 10.0f;
+
+        public float UISpawnDistance => _uiSpawnDistance;
+
 #region Unity Lifecycle
         private void Awake()
         {
@@ -40,5 +45,13 @@ namespace EnergonSoftware.Core.UI
             base.OnDestroy();
         }
 #endregion
+
+        public GameObject InstantiateUIChild(GameObject prefab, Transform parent, bool worldPositionStays)
+        {
+            Vector3 scale = prefab.transform.localScale;
+            GameObject obj = Instantiate(prefab, parent, worldPositionStays);
+            obj.transform.localScale = scale;
+            return obj;
+        }
     }
 }

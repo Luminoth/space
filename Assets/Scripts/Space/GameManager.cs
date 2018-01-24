@@ -1,4 +1,5 @@
-﻿using EnergonSoftware.Core.Camera;
+﻿using EnergonSoftware.Core;
+using EnergonSoftware.Core.Camera;
 using EnergonSoftware.Core.Input;
 using EnergonSoftware.Core.UI;
 using EnergonSoftware.Core.Util;
@@ -47,7 +48,8 @@ namespace EnergonSoftware.Space
 #region Event Handlers
         private void PointerDownEventHandler(object sender, InputManager.PointerEventArgs args)
         {
-            if(PointerEventData.InputButton.Right != args.Button) {
+UnityEngine.Debug.Log($"obj pointer click: {args.Button}: {name}");
+            if(!Config.UseVR && PointerEventData.InputButton.Right != args.Button) {
                 return;
             }
 
@@ -64,6 +66,7 @@ namespace EnergonSoftware.Space
                             _followCamera.SetTarget(PlayerShip.gameObject);
                         });
 
+UnityEngine.Debug.Log($"mgr moving context menu to {args.PointerPosition}");
                         contextMenu.MoveTo(args.PointerPosition);
                     }
                 );

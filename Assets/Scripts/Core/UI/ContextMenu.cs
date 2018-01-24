@@ -10,7 +10,7 @@ using UnityEngine.UI;
 namespace EnergonSoftware.Core.UI
 {
     [RequireComponent(typeof(Canvas))]
-    public class ContextMenu : Window<ContextMenu>, IPointerEnterHandler, IPointerExitHandler
+    public sealed class ContextMenu : Window<ContextMenu>, IPointerEnterHandler, IPointerExitHandler
     {
         [SerializeField]
         VerticalLayoutGroup _layout;
@@ -26,44 +26,51 @@ namespace EnergonSoftware.Core.UI
         private bool _active;
 
 #region Unity Lifecycle
-        private void Awake()
+        protected override void Awake()
         {
+            base.Awake();
+
             InputManager.Instance.PointerDownEvent += PointerDownEventHandler;
         }
 
-        private void OnDestroy()
+        protected override void OnDestroy()
         {
             if(InputManager.HasInstance) {
                 InputManager.Instance.PointerDownEvent -= PointerDownEventHandler;
             }
+
+            base.OnDestroy();
         }
 #endregion
 
         public void AddItem(string text, Action callback)
         {
-            GameObject go = Instantiate(_contextMenuItemPrefab, _layout.transform, true);
+            GameObject go = UIManager.Instance.InstantiateUIChild(_contextMenuItemPrefab, _layout.transform, true);
             ContextMenuItem item = go?.GetComponent<ContextMenuItem>();
             item?.Initialize(this, text, callback);
         }
 
         public void AddSeparator()
         {
-            Instantiate(_contextMenuItemSeparatorPrefab, _layout.transform, true);
+            UIManager.Instance.InstantiateUIChild(_contextMenuItemSeparatorPrefab, _layout.transform, true);
         }
 
 #region Event Handlers
         public void OnPointerEnter(PointerEventData eventData)
         {
+Debug.Log("Pointer enter");
             _active = true;
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
+Debug.Log("Pointer exit");
             _active = false;
         }
 
         private void PointerDownEventHandler(object sender, EventArgs args)
         {
+Debug.Log($"Close? {!_active}");
             if(!_active) {
                 Close();
             }

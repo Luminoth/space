@@ -50,13 +50,6 @@ namespace EnergonSoftware.Space
 GameManager.Instance.SetPlayerShip(this);
         }
 
-        private void OnDestroy()
-        {
-if(GameManager.HasInstance) {
-    GameManager.Instance.SetPlayerShip(null);
-}
-        }
-
         private void OnDrawGizmos()
         {
             Debug.DrawLine(transform.position, transform.position + (transform.forward * 25.0f), Color.red);

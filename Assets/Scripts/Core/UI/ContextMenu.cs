@@ -58,19 +58,16 @@ namespace EnergonSoftware.Core.UI
 #region Event Handlers
         public void OnPointerEnter(PointerEventData eventData)
         {
-Debug.Log("Pointer enter");
             _active = true;
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
-Debug.Log("Pointer exit");
             _active = false;
         }
 
         private void PointerDownEventHandler(object sender, EventArgs args)
         {
-Debug.Log($"Close? {!_active}");
             if(!_active) {
                 Close();
             }

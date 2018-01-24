@@ -31,7 +31,6 @@ namespace EnergonSoftware.Core.UI
 #region Event Handlers
         public void OnPointerClick(PointerEventData eventData)
         {
-UnityEngine.Debug.Log($"obj pointer click: {eventData.button}: {name}");
             if(!Config.UseVR && PointerEventData.InputButton.Right != eventData.button) {
                 return;
             }
@@ -47,8 +46,7 @@ UnityEngine.Debug.Log($"obj pointer click: {eventData.button}: {name}");
                         }
                     }
 
-UnityEngine.Debug.Log($"obj moving context menu to {eventData.position}");
-                    contextMenu.MoveTo(eventData.position);
+                    contextMenu.MoveTo(UIManager.Instance.GetUISpawnPosition());
                 }
             );
         }

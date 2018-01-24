@@ -21,7 +21,14 @@ namespace EnergonSoftware.Core.Input
         public event EventHandler<PointerEventArgs> PointerDownEvent;
 #endregion
 
+        private GvrPointerInputModule _gvrPointerInputModule;
+
 #region Unity Lifecycle
+        private void Awake()
+        {
+            _gvrPointerInputModule = GvrPointerInputModule.FindInputModule();
+        }
+
         private void Update()
         {
             if(Config.UseVR) {
@@ -31,6 +38,18 @@ namespace EnergonSoftware.Core.Input
             }
         }
 #endregion
+
+        public bool IsPointerOverGameObject()
+        {
+            return Config.UseVR ? _gvrPointerInputModule.IsPointerOverGameObject(0)
+                : Physics.Raycast(UIManager.Instance.UICamera.ScreenPointToRay(UnityEngine.Input.mousePosition));
+        }
+
+        public Vector3 GetPointerSpawnPosition(float distance)
+        {
+            return Config.UseVR ? GvrPointerInputModule.Pointer.GetPointAlongPointer(UIManager.Instance.UISpawnDistance)
+                : UnityEngine.Input.mousePosition;  // TOOD: distance
+        }
 
         private void PollMouse()
         {
@@ -64,7 +83,7 @@ namespace EnergonSoftware.Core.Input
             if(GvrControllerInput.ClickButtonDown) {
                 PointerDownEvent?.Invoke(null, new PointerEventArgs
                 {
-                    PointerPosition = GvrPointerInputModule.Pointer.GetPointAlongPointer(UIManager.Instance.UISpawnDistance),
+                    PointerPosition = UnityEngine.Input.mousePosition,  // TODO: def not right
                     Button = PointerEventData.InputButton.Right
                 });
             }

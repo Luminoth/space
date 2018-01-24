@@ -1,4 +1,5 @@
 ﻿using EnergonSoftware.Core.Assets;
+using EnergonSoftware.Core.Input;
 using EnergonSoftware.Core.Util;
 
 using UnityEngine;
@@ -52,6 +53,11 @@ namespace EnergonSoftware.Core.UI
             GameObject obj = Instantiate(prefab, parent, worldPositionStays);
             obj.transform.localScale = scale;
             return obj;
+        }
+
+        public Vector3 GetUISpawnPosition()
+        {
+            return InputManager.Instance.GetPointerSpawnPosition(UISpawnDistance);
         }
     }
 }

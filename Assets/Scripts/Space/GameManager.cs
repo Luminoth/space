@@ -48,12 +48,11 @@ namespace EnergonSoftware.Space
 #region Event Handlers
         private void PointerDownEventHandler(object sender, InputManager.PointerEventArgs args)
         {
-UnityEngine.Debug.Log($"obj pointer click: {args.Button}: {name}");
             if(!Config.UseVR && PointerEventData.InputButton.Right != args.Button) {
                 return;
             }
 
-            if(!Physics.Raycast(MainCamera.ScreenPointToRay(args.PointerPosition))) {
+            if(!InputManager.Instance.IsPointerOverGameObject()) {
                 Core.UI.ContextMenu.Create(UIManager.Instance.ContextMenuPrefab,
                     contextMenu =>
                     {
@@ -66,8 +65,7 @@ UnityEngine.Debug.Log($"obj pointer click: {args.Button}: {name}");
                             _followCamera.SetTarget(PlayerShip.gameObject);
                         });
 
-UnityEngine.Debug.Log($"mgr moving context menu to {args.PointerPosition}");
-                        contextMenu.MoveTo(args.PointerPosition);
+                        contextMenu.MoveTo(UIManager.Instance.GetUISpawnPosition());
                     }
                 );
             }

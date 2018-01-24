@@ -14,13 +14,8 @@ namespace EnergonSoftware.Core.UI
 
         public GameObject ContextMenuPrefab { get; private set; }
 
-        [SerializeField]
-        private UnityEngine.Camera _uiCamera;
+        public UnityEngine.Camera UICamera { get; set; }
 
-        public UnityEngine.Camera UICamera => _uiCamera;
-
-        [SerializeField]
-        [ReadOnly]
         private GameObject _uiContainer;
 
         public GameObject UIContainer => _uiContainer;

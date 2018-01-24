@@ -12,22 +12,19 @@ namespace EnergonSoftware.Space
     public sealed class GameManager : SingletonBehavior<GameManager>
     {
         [SerializeField]
-        private Camera _mainCamera;
+        private Player _playerPrefab;
 
-        public Camera MainCamera => _mainCamera;
+        private Player _player;
 
-        [SerializeField]
+        public Camera MainCamera => _player.Camera;
+
         private FollowCamera _followCamera;
 
-        [SerializeField]
-        [ReadOnly]
-        private Ship _playerShip;
-
-        public Ship PlayerShip => _playerShip;
+        public Ship PlayerShip { get; private set; }
 
         public void SetPlayerShip(Ship playerShip)
         {
-            _playerShip = playerShip;
+            PlayerShip = playerShip;
             _followCamera.SetTarget(PlayerShip.gameObject);
         }
 
@@ -35,6 +32,10 @@ namespace EnergonSoftware.Space
         private void Awake()
         {
             InputManager.Instance.PointerDownEvent += PointerDownEventHandler;
+
+            _player = Instantiate(_playerPrefab);
+            _followCamera = _player.GetComponent<FollowCamera>();
+            UIManager.Instance.UICamera = _player.Camera;
         }
 
         protected override void OnDestroy()

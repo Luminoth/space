@@ -2,6 +2,6 @@
 {
     public static class Config
     {
-        public static bool UseVR => true;
+        public static bool UseVR { get; set; }
     }
 }

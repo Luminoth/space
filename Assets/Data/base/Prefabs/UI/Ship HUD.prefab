@@ -21,7 +21,9 @@ GameObject:
   - component: {fileID: 224839762030035038}
   - component: {fileID: 223012695276656820}
   - component: {fileID: 114423499342141712}
+  - component: {fileID: 114139494155926666}
   - component: {fileID: 114631508640269374}
+  - component: {fileID: 114484397885259786}
   - component: {fileID: 114746030682598584}
   - component: {fileID: 114925964635700636}
   m_Layer: 5
@@ -100,6 +102,22 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 'Velocity: 0 m/s'
+--- !u!114 &114139494155926666
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1027803658505872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1301386320, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!114 &114267436892415070
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -162,6 +180,19 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+--- !u!114 &114484397885259786
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1027803658505872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9c86ac66a74aff4e9a49faa7fa0f008, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _graphicRaycaster: {fileID: 114139494155926666}
+  _gvrGraphicRaycaster: {fileID: 114631508640269374}
 --- !u!114 &114517274945398410
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -46,7 +46,7 @@ namespace EnergonSoftware.Core.UI
                         }
                     }
 
-                    contextMenu.MoveTo(UIManager.Instance.GetUISpawnPosition());
+                    contextMenu.MoveTo(UIManager.Instance.GetUIPointerSpawnPosition());
                 }
             );
         }

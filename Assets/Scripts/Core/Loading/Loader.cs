@@ -28,11 +28,14 @@ namespace EnergonSoftware.Core.Loading
         [SerializeField]
         private SceneManager _sceneManagerPrefab;
 
+        [SerializeField]
+        private LoadingScreen _loadingScreen;
+
 #region Unity Lifecycle
         private void Start()
         {
             StartCoroutine(Load(() => {
-                Destroy(gameObject);
+                Destroy();
             }));
         }
 #endregion
@@ -69,5 +72,11 @@ namespace EnergonSoftware.Core.Loading
         }
 
         protected abstract void LoadInitialScene(Action callback);
+
+        private void Destroy()
+        {
+            Destroy(_loadingScreen.gameObject);
+            Destroy(gameObject);
+        }
     }
 }

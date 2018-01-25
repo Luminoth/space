@@ -50,7 +50,7 @@ namespace EnergonSoftware.Core.UI
             return obj;
         }
 
-        public Vector3 GetUISpawnPosition()
+        public Vector3 GetUIPointerSpawnPosition()
         {
             return InputManager.Instance.GetPointerSpawnPosition(UISpawnDistance);
         }

@@ -53,3 +53,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerPrefab: {fileID: 114608027507646766, guid: bd67f7b47a5d3704f98b57f51f831ac2,
     type: 2}
+  _shipHUDPrefab: {fileID: 114925964635700636, guid: 0db9a6981cad4d74ead1f178846f6bdb,
+    type: 2}

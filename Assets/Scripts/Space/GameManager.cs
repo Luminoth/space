@@ -16,6 +16,9 @@ namespace EnergonSoftware.Space
 
         private Player _player;
 
+        [SerializeField]
+        private ShipHUD _shipHUDPrefab;
+
         public Camera MainCamera => _player.Camera;
 
         private FollowCamera _followCamera;
@@ -36,6 +39,15 @@ namespace EnergonSoftware.Space
             _player = Instantiate(_playerPrefab);
             _followCamera = _player.GetComponent<FollowCamera>();
             UIManager.Instance.UICamera = _player.Camera;
+        }
+
+        private void Start()
+        {
+            ShipHUD.Create(_shipHUDPrefab.gameObject,
+            shipHUD =>
+            {
+                shipHUD.transform.position = new Vector3(shipHUD.transform.position.x, shipHUD.transform.position.y, UIManager.Instance.UISpawnDistance);
+            });
         }
 
         protected override void OnDestroy()
@@ -66,7 +78,7 @@ namespace EnergonSoftware.Space
                             _followCamera.SetTarget(PlayerShip.gameObject);
                         });
 
-                        contextMenu.MoveTo(UIManager.Instance.GetUISpawnPosition());
+                        contextMenu.MoveTo(UIManager.Instance.GetUIPointerSpawnPosition());
                     }
                 );
             }

@@ -41,14 +41,16 @@ namespace EnergonSoftware.Core.Input
 
         public bool IsPointerOverGameObject()
         {
-            return Config.UseVR ? _gvrPointerInputModule.IsPointerOverGameObject(0)
+            return Config.UseVR
+                ? _gvrPointerInputModule.IsPointerOverGameObject(0)
                 : Physics.Raycast(UIManager.Instance.UICamera.ScreenPointToRay(UnityEngine.Input.mousePosition));
         }
 
         public Vector3 GetPointerSpawnPosition(float distance)
         {
-            return Config.UseVR ? GvrPointerInputModule.Pointer.GetPointAlongPointer(UIManager.Instance.UISpawnDistance)
-                : UnityEngine.Input.mousePosition;  // TOOD: distance
+            return Config.UseVR
+                ? GvrPointerInputModule.Pointer.GetPointAlongPointer(UIManager.Instance.UISpawnDistance)
+                : UIManager.Instance.UICamera.ScreenPointToRay(UnityEngine.Input.mousePosition).GetPoint(UIManager.Instance.UISpawnDistance);
         }
 
         private void PollMouse()

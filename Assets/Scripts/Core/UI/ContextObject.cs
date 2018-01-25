@@ -35,7 +35,7 @@ namespace EnergonSoftware.Core.UI
                 return;
             }
 
-            ContextMenu.Create(UIManager.Instance.ContextMenuPrefab,
+            ContextMenu.CreateOverlay(UIManager.Instance.ContextMenuPrefab,
                 contextMenu =>
                 {
                     foreach(ContextObjectItem item in _items) {

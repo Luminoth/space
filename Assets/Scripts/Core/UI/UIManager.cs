@@ -14,11 +14,14 @@ namespace EnergonSoftware.Core.UI
 
         public GameObject ContextMenuPrefab { get; private set; }
 
+        [SerializeField]
+        private GameObject _overlayUIContainerPrefab;
+
         public UnityEngine.Camera UICamera { get; set; }
 
-        private GameObject _uiContainer;
+        private GameObject _overlayUIContainer;
 
-        public GameObject UIContainer => _uiContainer;
+        public GameObject OverlayUIContainer => _overlayUIContainer;
 
         [SerializeField]
         private float _uiSpawnDistance = 10.0f;
@@ -28,15 +31,15 @@ namespace EnergonSoftware.Core.UI
 #region Unity Lifecycle
         private void Awake()
         {
-            _uiContainer = new GameObject("UI");
+            _overlayUIContainer = Instantiate(_overlayUIContainerPrefab, PlayerManager.Instance.Player.transform);
 
             ContextMenuPrefab = AssetManager.Instance.LoadPrefab(_contextMenuPrefabPath);
         }
 
         protected override void OnDestroy()
         {
-            Destroy(UIContainer);
-            _uiContainer = null;
+            Destroy(_overlayUIContainer);
+            _overlayUIContainer = null;
 
             base.OnDestroy();
         }

@@ -13,9 +13,14 @@ namespace EnergonSoftware.Core.UI
 
         // TODO: can the UI manager do this?
         // can we have open/close callbacks as well?
-        public static T Create(GameObject prefab, Action<T> createCallback=null, Action destroyCallback=null)
+        public static T CreateOverlay(GameObject prefab, Action<T> createCallback=null, Action destroyCallback=null)
         {
-            GameObject go = Instantiate(prefab, UIManager.Instance.UIContainer.transform, true);
+            return Create(prefab, UIManager.Instance.OverlayUIContainer.transform, createCallback, destroyCallback);
+        }
+
+        public static T Create(GameObject prefab, Transform parent, Action<T> createCallback=null, Action destroyCallback=null)
+        {
+            GameObject go = Instantiate(prefab, parent, true);
             T component = go.GetComponent<T>();
 
             createCallback?.Invoke(component);

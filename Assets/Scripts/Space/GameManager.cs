@@ -48,7 +48,7 @@ namespace EnergonSoftware.Space
             }
 
             if(!InputManager.Instance.IsPointerOverGameObject()) {
-                Core.UI.ContextMenu.Create(UIManager.Instance.ContextMenuPrefab,
+                Core.UI.ContextMenu.CreateOverlay(UIManager.Instance.ContextMenuPrefab,
                     contextMenu =>
                     {
                         contextMenu.AddItem("Free Look", () => {

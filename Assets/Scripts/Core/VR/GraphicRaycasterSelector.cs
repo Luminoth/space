@@ -16,8 +16,8 @@ namespace EnergonSoftware.Core.VR
 #region Unity Lifecycle
         private void Awake()
         {
-            _graphicRaycaster.enabled = !Config.UseVR;
-            _gvrGraphicRaycaster.enabled = Config.UseVR;
+            _graphicRaycaster.enabled = !PlayerManager.Instance.Player.EnableVR;
+            _gvrGraphicRaycaster.enabled = PlayerManager.Instance.Player.EnableVR;
         }
 #endregion
     }

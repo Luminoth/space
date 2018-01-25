@@ -1,23 +1,27 @@
 ﻿using EnergonSoftware.Core.Util;
 
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace EnergonSoftware.Core
 {
     public sealed class Player : MonoBehavior
     {
         [SerializeField]
+        private bool _enableVR = true;
+
+        public bool EnableVR => _enableVR;
+
+        [SerializeField]
         private UnityEngine.Camera _camera;
 
         public UnityEngine.Camera Camera => _camera;
 
-        [SerializeField]
-        private GameObject _gvrController;
-
 #region Unity Lifecycle
         private void Awake()
         {
-            _gvrController.SetActive(Config.UseVR);
+            Camera.GetComponent<PhysicsRaycaster>().enabled = !EnableVR;
+            Camera.GetComponent<GvrPointerPhysicsRaycaster>().enabled = EnableVR;
         }
 #endregion
     }

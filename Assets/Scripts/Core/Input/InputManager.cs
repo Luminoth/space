@@ -31,7 +31,7 @@ namespace EnergonSoftware.Core.Input
 
         private void Update()
         {
-            if(Config.UseVR) {
+            if(PlayerManager.Instance.Player.EnableVR) {
                 PollVR();
             } else {
                 PollMouse();
@@ -41,14 +41,14 @@ namespace EnergonSoftware.Core.Input
 
         public bool IsPointerOverGameObject()
         {
-            return Config.UseVR
+            return PlayerManager.Instance.Player.EnableVR
                 ? _gvrPointerInputModule.IsPointerOverGameObject(0)
                 : Physics.Raycast(UIManager.Instance.UICamera.ScreenPointToRay(UnityEngine.Input.mousePosition));
         }
 
         public Vector3 GetPointerSpawnPosition(float distance)
         {
-            return Config.UseVR
+            return PlayerManager.Instance.Player.EnableVR
                 ? GvrPointerInputModule.Pointer.GetPointAlongPointer(UIManager.Instance.UISpawnDistance)
                 : UIManager.Instance.UICamera.ScreenPointToRay(UnityEngine.Input.mousePosition).GetPoint(UIManager.Instance.UISpawnDistance);
         }

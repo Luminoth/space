@@ -14,12 +14,6 @@ namespace EnergonSoftware.Core.Loading
     public abstract class Loader : MonoBehavior
     {
         [SerializeField]
-        private bool _enableVR = true;
-
-        [SerializeField]
-        private GameObject _gvrPrefab;
-
-        [SerializeField]
         private GameObject _eventSystemPrefab;
 
         [SerializeField]
@@ -27,6 +21,12 @@ namespace EnergonSoftware.Core.Loading
 
         [SerializeField]
         private SceneManager _sceneManagerPrefab;
+
+        [SerializeField]
+        private Player _player;
+
+        [SerializeField]
+        private GameObject _gvrObject;
 
         [SerializeField]
         private LoadingScreen _loadingScreen;
@@ -44,6 +44,15 @@ namespace EnergonSoftware.Core.Loading
         {
             GameObject managerContainer = new GameObject("Managers");
 
+            if(_player.EnableVR) {
+                Debug.Log("Initializing VR...");
+            } else {
+                Debug.Log("Initializing event system...");
+                Destroy(_gvrObject);
+                Instantiate(_eventSystemPrefab);
+            }
+            yield return null;
+
             Debug.Log("Creating managers...");
             CreateManagers(managerContainer);
             yield return null;
@@ -52,19 +61,15 @@ namespace EnergonSoftware.Core.Loading
             LoadInitialScene(() => {
                 callback?.Invoke();
             });
+            yield return null;
         }
 
         protected virtual void CreateManagers(GameObject managerContainer)
         {
             AssetManager.Create(managerContainer);
 
-            if(_enableVR) {
-                Instantiate(_gvrPrefab);
-                Config.UseVR = true;
-            } else {
-                Instantiate(_eventSystemPrefab);
-                Config.UseVR = false;
-            }
+            PlayerManager.Create(managerContainer);
+            PlayerManager.Instance.Player = _player;
 
             InputManager.Create(managerContainer);
             UIManager.CreateFromPrefab(_uiManagerPrefab.gameObject, managerContainer);

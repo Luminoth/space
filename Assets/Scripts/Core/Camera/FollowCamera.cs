@@ -154,7 +154,7 @@ namespace EnergonSoftware.Core.Camera
 
             // TODO: this doens't work if we free-look and zoom
             // because we're essentially moving the target position, not the camera position
-            Vector3 targetPosition = Target?.transform.position ?? (transform.position + (transform.forward * _orbitRadius));
+            Vector3 targetPosition = null == Target ? (transform.position + (transform.forward * _orbitRadius)) : Target.transform.position;
             transform.position = targetPosition + orbitRotation * new Vector3(0.0f, 0.0f, -_orbitRadius);
         }
     }

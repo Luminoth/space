@@ -31,7 +31,7 @@ namespace EnergonSoftware.Core.UI
 #region Event Handlers
         public void OnPointerClick(PointerEventData eventData)
         {
-            if(!Config.UseVR && PointerEventData.InputButton.Right != eventData.button) {
+            if(!PlayerManager.Instance.Player.EnableVR && PointerEventData.InputButton.Right != eventData.button) {
                 return;
             }
 

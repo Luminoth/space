@@ -47,7 +47,7 @@ namespace EnergonSoftware.Core.UI
         {
             transform.position = position;
             if(lookAtCamera) {
-                transform.forward = UIManager.Instance.UICamera.transform.forward;
+                transform.forward = transform.position - UIManager.Instance.UICamera.transform.position;
             }
         }
 

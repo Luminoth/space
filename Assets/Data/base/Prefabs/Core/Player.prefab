@@ -24,7 +24,6 @@ GameObject:
   - component: {fileID: 81436040268625776}
   - component: {fileID: 114726982649780400}
   - component: {fileID: 114439270881611924}
-  - component: {fileID: 114306364301937028}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -97,7 +96,7 @@ GameObject:
   - component: {fileID: 114135473964769860}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -220,7 +219,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.01
-  far clip plane: 1000
+  far clip plane: 10000
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -334,7 +333,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1773617178476710}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 92cdd0a02728b3046b8db1f6fe84f99a, type: 3}
   m_Name: 
@@ -403,19 +402,6 @@ MonoBehaviour:
     touching: 0
     touchPos: {x: 0.5, y: 0.5}
   maximumAlpha: 1
---- !u!114 &114306364301937028
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1036397625511314}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee7bce2f9717639478399d085d0c9d00, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _physicsRaycaster: {fileID: 114726982649780400}
-  _gvrPhysicsRaycaster: {fileID: 114439270881611924}
 --- !u!114 &114314648006509220
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -490,8 +476,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ac704549905ca540bf4c48ff684292d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enableVR: 1
   _camera: {fileID: 20272612850177068}
-  _gvrController: {fileID: 1196947233804240}
 --- !u!114 &114657290153752946
 MonoBehaviour:
   m_ObjectHideFlags: 1

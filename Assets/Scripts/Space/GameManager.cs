@@ -12,14 +12,9 @@ namespace EnergonSoftware.Space
     public sealed class GameManager : SingletonBehavior<GameManager>
     {
         [SerializeField]
-        private Player _playerPrefab;
-
-        private Player _player;
-
-        [SerializeField]
         private ShipHUD _shipHUDPrefab;
 
-        public Camera MainCamera => _player.Camera;
+        public Camera MainCamera => PlayerManager.Instance.Player.Camera;
 
         private FollowCamera _followCamera;
 
@@ -36,9 +31,8 @@ namespace EnergonSoftware.Space
         {
             InputManager.Instance.PointerDownEvent += PointerDownEventHandler;
 
-            _player = Instantiate(_playerPrefab);
-            _followCamera = _player.GetComponent<FollowCamera>();
-            UIManager.Instance.UICamera = _player.Camera;
+            _followCamera = PlayerManager.Instance.Player.GetComponent<FollowCamera>();
+            UIManager.Instance.UICamera = MainCamera;
         }
 
         private void Start()
@@ -61,7 +55,7 @@ namespace EnergonSoftware.Space
 #region Event Handlers
         private void PointerDownEventHandler(object sender, InputManager.PointerEventArgs args)
         {
-            if(!Config.UseVR && PointerEventData.InputButton.Right != args.Button) {
+            if(!PlayerManager.Instance.Player && PointerEventData.InputButton.Right != args.Button) {
                 return;
             }
 

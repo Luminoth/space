@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 114646908009011892}
   - component: {fileID: 114454363741702966}
   - component: {fileID: 114003104054679762}
+  - component: {fileID: 114774512140583624}
   m_Layer: 5
   m_Name: ContextMenu
   m_TagString: Untagged
@@ -211,6 +212,17 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &114774512140583624
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1964078452447134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1b078736d3209c4388ff3262d931562, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!222 &222394615562017778
 CanvasRenderer:
   m_ObjectHideFlags: 1

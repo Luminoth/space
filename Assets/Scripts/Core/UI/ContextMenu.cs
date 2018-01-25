@@ -10,7 +10,7 @@ using UnityEngine.UI;
 namespace EnergonSoftware.Core.UI
 {
     [RequireComponent(typeof(Canvas))]
-    public sealed class ContextMenu : Window<ContextMenu>, IPointerEnterHandler, IPointerExitHandler
+    public sealed class ContextMenu : Window<ContextMenu>, IWindow, IPointerEnterHandler, IPointerExitHandler
     {
         [SerializeField]
         VerticalLayoutGroup _layout;

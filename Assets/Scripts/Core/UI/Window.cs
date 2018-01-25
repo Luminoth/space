@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace EnergonSoftware.Core.UI
 {
-    public abstract class Window<T> : MonoBehavior where T: Window<T>
+    public abstract class Window<T> : MonoBehavior where T: Window<T>, IWindow
     {
         [SerializeField]
         private RectTransform _panel;
@@ -43,12 +43,9 @@ namespace EnergonSoftware.Core.UI
         }
 #endregion
 
-        public void MoveTo(Vector3 position, bool lookAtCamera=true)
+        public void MoveTo(Vector3 position)
         {
             transform.position = position;
-            if(lookAtCamera) {
-                transform.forward = transform.position - UIManager.Instance.UICamera.transform.position;
-            }
         }
 
         public void Close()

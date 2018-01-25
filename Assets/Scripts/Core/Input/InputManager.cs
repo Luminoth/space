@@ -12,13 +12,12 @@ namespace EnergonSoftware.Core.Input
     {
         public class PointerEventArgs : EventArgs
         {
-            public Vector3 PointerPosition { get; set; }
-
             public PointerEventData.InputButton Button { get; set; }
         }
 
 #region Events
         public event EventHandler<PointerEventArgs> PointerDownEvent;
+        public event EventHandler<PointerEventArgs> PointerUpEvent;
 #endregion
 
         private GvrPointerInputModule _gvrPointerInputModule;
@@ -58,7 +57,11 @@ namespace EnergonSoftware.Core.Input
             if(UnityEngine.Input.GetMouseButtonDown(0)) {
                 PointerDownEvent?.Invoke(null, new PointerEventArgs
                 {
-                    PointerPosition = UnityEngine.Input.mousePosition,
+                    Button = PointerEventData.InputButton.Left
+                });
+            } else if(UnityEngine.Input.GetMouseButtonUp(0)) {
+                PointerUpEvent?.Invoke(null, new PointerEventArgs
+                {
                     Button = PointerEventData.InputButton.Left
                 });
             }
@@ -66,7 +69,11 @@ namespace EnergonSoftware.Core.Input
             if(UnityEngine.Input.GetMouseButtonDown(1)) {
                 PointerDownEvent?.Invoke(null, new PointerEventArgs
                 {
-                    PointerPosition = UnityEngine.Input.mousePosition,
+                    Button = PointerEventData.InputButton.Right
+                });
+            } else if(UnityEngine.Input.GetMouseButtonUp(1)) {
+                PointerUpEvent?.Invoke(null, new PointerEventArgs
+                {
                     Button = PointerEventData.InputButton.Right
                 });
             }
@@ -74,7 +81,11 @@ namespace EnergonSoftware.Core.Input
             if(UnityEngine.Input.GetMouseButtonDown(2)) {
                 PointerDownEvent?.Invoke(null, new PointerEventArgs
                 {
-                    PointerPosition = UnityEngine.Input.mousePosition,
+                    Button = PointerEventData.InputButton.Middle
+                });
+            } else if(UnityEngine.Input.GetMouseButtonUp(2)) {
+                PointerUpEvent?.Invoke(null, new PointerEventArgs
+                {
                     Button = PointerEventData.InputButton.Middle
                 });
             }
@@ -85,7 +96,11 @@ namespace EnergonSoftware.Core.Input
             if(GvrControllerInput.ClickButtonDown) {
                 PointerDownEvent?.Invoke(null, new PointerEventArgs
                 {
-                    PointerPosition = UnityEngine.Input.mousePosition,  // TODO: def not right
+                    Button = PointerEventData.InputButton.Right
+                });
+            } else if(GvrControllerInput.ClickButtonUp) {
+                PointerUpEvent?.Invoke(null, new PointerEventArgs
+                {
                     Button = PointerEventData.InputButton.Right
                 });
             }

@@ -11,9 +11,6 @@ namespace EnergonSoftware.Space
 {
     public sealed class GameManager : SingletonBehavior<GameManager>
     {
-        [SerializeField]
-        private ShipHUD _shipHUDPrefab;
-
         public Camera MainCamera => PlayerManager.Instance.Player.Camera;
 
         private FollowCamera _followCamera;
@@ -29,33 +26,24 @@ namespace EnergonSoftware.Space
 #region Unity Lifecycle
         private void Awake()
         {
-            InputManager.Instance.PointerDownEvent += PointerDownEventHandler;
+            InputManager.Instance.PointerUpEvent += PointerUpEventHandler;
 
             _followCamera = PlayerManager.Instance.Player.GetComponent<FollowCamera>();
             UIManager.Instance.UICamera = MainCamera;
         }
 
-        private void Start()
-        {
-            ShipHUD.Create(_shipHUDPrefab.gameObject,
-            shipHUD =>
-            {
-                shipHUD.transform.position = new Vector3(shipHUD.transform.position.x, shipHUD.transform.position.y, UIManager.Instance.UISpawnDistance);
-            });
-        }
-
         protected override void OnDestroy()
         {
             if(InputManager.HasInstance) {
-                InputManager.Instance.PointerDownEvent -= PointerDownEventHandler;
+                InputManager.Instance.PointerUpEvent -= PointerUpEventHandler;
             }
         }
 #endregion
 
 #region Event Handlers
-        private void PointerDownEventHandler(object sender, InputManager.PointerEventArgs args)
+        private void PointerUpEventHandler(object sender, InputManager.PointerEventArgs args)
         {
-            if(!PlayerManager.Instance.Player && PointerEventData.InputButton.Right != args.Button) {
+            if(!PlayerManager.Instance.Player.EnableVR && PointerEventData.InputButton.Right != args.Button) {
                 return;
             }
 

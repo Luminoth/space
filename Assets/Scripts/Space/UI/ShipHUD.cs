@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace EnergonSoftware.Space
 {
-    public sealed class ShipHUD : Window<ShipHUD>
+    public sealed class ShipHUD : Window<ShipHUD>, IWindow
     {
         [SerializeField]
         private Text _velocityText;

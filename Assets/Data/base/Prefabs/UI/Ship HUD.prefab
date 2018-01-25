@@ -26,6 +26,7 @@ GameObject:
   - component: {fileID: 114484397885259786}
   - component: {fileID: 114746030682598584}
   - component: {fileID: 114925964635700636}
+  - component: {fileID: 114077061924489988}
   m_Layer: 5
   m_Name: Ship HUD
   m_TagString: Untagged
@@ -102,6 +103,17 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 'Velocity: 0 m/s'
+--- !u!114 &114077061924489988
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1027803658505872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1b078736d3209c4388ff3262d931562, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114139494155926666
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -347,6 +359,6 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: -5.5}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}

@@ -196,7 +196,7 @@ Prefab:
     - target: {fileID: 114608027507646766, guid: bd67f7b47a5d3704f98b57f51f831ac2,
         type: 2}
       propertyPath: _enableVR
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bd67f7b47a5d3704f98b57f51f831ac2, type: 2}

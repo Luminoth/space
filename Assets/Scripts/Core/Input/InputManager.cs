@@ -91,8 +91,15 @@ namespace EnergonSoftware.Core.Input
             }
         }
 
+        // https://gist.github.com/bigfootaus/6da387294ebfdf80cb354f3477c4ce58
+        const float VRTouchDeadZone = 0.2f;
+
         private void PollVR()
         {
+            // touchpos between (0, 0) and (1, 1) so normalize to (-1, -1) and (1, 1)
+            Vector2 normalizedTouchPos = (GvrControllerInput.TouchPos * 2.0f) - Vector2.one;
+            Debug.Log(normalizedTouchPos);
+
             if(GvrControllerInput.ClickButtonDown) {
                 PointerDownEvent?.Invoke(null, new PointerEventArgs
                 {

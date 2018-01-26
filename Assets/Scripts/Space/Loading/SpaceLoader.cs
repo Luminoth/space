@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 
 using EnergonSoftware.Core.Loading;
 using EnergonSoftware.Core.Scenes;
@@ -15,9 +16,12 @@ namespace EnergonSoftware.Space.Loading
         [SerializeField]
         private string _initialSceneName;
 
-        protected override void CreateManagers(GameObject managerContainer)
+        protected override IEnumerator CreateManagersRoutine(GameObject managerContainer)
         {
-            base.CreateManagers(managerContainer);
+            IEnumerator runner = base.CreateManagersRoutine(managerContainer);
+            while(runner.MoveNext()) {
+                yield return null;
+            }
 
             GameManager.CreateFromPrefab(_gameManagerPrefab.gameObject, managerContainer);
         }

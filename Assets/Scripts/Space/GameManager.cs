@@ -11,6 +11,9 @@ namespace EnergonSoftware.Space
 {
     public sealed class GameManager : SingletonBehavior<GameManager>
     {
+        [SerializeField]
+        private ShipHUD _shipHUDPrefab;
+
         public Camera MainCamera => PlayerManager.Instance.Player.Camera;
 
         private FollowCamera _followCamera;
@@ -28,9 +31,18 @@ namespace EnergonSoftware.Space
         {
             InputManager.Instance.PointerUpEvent += PointerUpEventHandler;
 
+// TODO: just expose a method in the player manager rather than getting the component
             _followCamera = PlayerManager.Instance.Player.GetComponent<FollowCamera>();
             UIManager.Instance.UICamera = MainCamera;
         }
+        private void Start() 
+        { 
+            ShipHUD.CreateOverlay(_shipHUDPrefab.gameObject,
+                shipHUD => 
+                { 
+                    shipHUD.transform.position = new Vector3(shipHUD.transform.position.x, shipHUD.transform.position.y, UIManager.Instance.UISpawnDistance); 
+                }); 
+        } 
 
         protected override void OnDestroy()
         {

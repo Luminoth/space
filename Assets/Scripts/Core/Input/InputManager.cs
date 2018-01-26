@@ -20,6 +20,9 @@ namespace EnergonSoftware.Core.Input
         public event EventHandler<PointerEventArgs> PointerUpEvent;
 #endregion
 
+        [SerializeField]
+        private float _vrTouchDeadZone = 0.2f;
+
         private GvrPointerInputModule _gvrPointerInputModule;
 
 #region Unity Lifecycle
@@ -37,6 +40,45 @@ namespace EnergonSoftware.Core.Input
             }
         }
 #endregion
+
+        public bool IsPointerDown()
+        {
+            return PlayerManager.Instance.Player.EnableVR
+                ? GvrPointerInputModule.Pointer.TouchDown
+                : UnityEngine.Input.GetMouseButtonDown(1);
+        }
+
+        public bool IsPointerUp()
+        {
+            return PlayerManager.Instance.Player.EnableVR
+                ? GvrPointerInputModule.Pointer.TouchUp
+                : UnityEngine.Input.GetMouseButtonUp(1);
+        }
+
+        public bool IsPointerHeld()
+        {
+            return PlayerManager.Instance.Player.EnableVR
+                ? GvrPointerInputModule.Pointer.IsTouching
+                : UnityEngine.Input.GetMouseButton(1);
+        }
+
+        public Vector3 GetPointerAxis()
+        {
+            if(!PlayerManager.Instance.Player.EnableVR) {
+                return new Vector3(UnityEngine.Input.GetAxis("Mouse X"), UnityEngine.Input.GetAxis("Mouse Y"), UnityEngine.Input.GetAxis("Mouse ScrollWheel"));
+            }
+
+            if(!GvrControllerInput.IsTouching) {
+                return Vector3.zero;
+            }
+
+            // touchpos between (0, 0) and (1, 1) so normalize to (-1, -1) and (1, 1)
+            Vector2 normalizedTouchPos = (GvrControllerInput.TouchPos * 2.0f) - Vector2.one;
+            normalizedTouchPos.x = Mathf.Abs(normalizedTouchPos.x) < _vrTouchDeadZone ? 0.0f : normalizedTouchPos.x;
+            normalizedTouchPos.y = Mathf.Abs(normalizedTouchPos.y) < _vrTouchDeadZone ? 0.0f : normalizedTouchPos.y;
+
+            return new Vector3(normalizedTouchPos.x, normalizedTouchPos.y, 0.0f);
+        }
 
         public bool IsPointerOverGameObject()
         {
@@ -91,15 +133,8 @@ namespace EnergonSoftware.Core.Input
             }
         }
 
-        // https://gist.github.com/bigfootaus/6da387294ebfdf80cb354f3477c4ce58
-        const float VRTouchDeadZone = 0.2f;
-
         private void PollVR()
         {
-            // touchpos between (0, 0) and (1, 1) so normalize to (-1, -1) and (1, 1)
-            Vector2 normalizedTouchPos = (GvrControllerInput.TouchPos * 2.0f) - Vector2.one;
-            Debug.Log(normalizedTouchPos);
-
             if(GvrControllerInput.ClickButtonDown) {
                 PointerDownEvent?.Invoke(null, new PointerEventArgs
                 {

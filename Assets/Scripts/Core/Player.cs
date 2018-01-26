@@ -1,4 +1,5 @@
-﻿using EnergonSoftware.Core.Util;
+﻿using EnergonSoftware.Core.Camera;
+using EnergonSoftware.Core.Util;
 
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -24,5 +25,10 @@ namespace EnergonSoftware.Core
             Camera.GetComponent<GvrPointerPhysicsRaycaster>().enabled = EnableVR;
         }
 #endregion
+
+        public void EnableFollowCam(bool enable)
+        {
+            GetComponent<FollowCamera>().enabled = enable;
+        }
     }
 }

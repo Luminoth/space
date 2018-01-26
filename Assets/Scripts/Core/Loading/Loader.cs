@@ -17,6 +17,9 @@ namespace EnergonSoftware.Core.Loading
         private GameObject _eventSystemPrefab;
 
         [SerializeField]
+        private InputManager _inputManagerPrefab;
+
+        [SerializeField]
         private UIManager _uiManagerPrefab;
 
         [SerializeField]
@@ -54,7 +57,10 @@ namespace EnergonSoftware.Core.Loading
             yield return null;
 
             Debug.Log("Creating managers...");
-            CreateManagers(managerContainer);
+            IEnumerator runner = CreateManagersRoutine(managerContainer);
+            while(runner.MoveNext()) {
+                yield return null;
+            }
             yield return null;
 
             Debug.Log("Loading initial scene...");
@@ -64,14 +70,15 @@ namespace EnergonSoftware.Core.Loading
             yield return null;
         }
 
-        protected virtual void CreateManagers(GameObject managerContainer)
+        protected virtual IEnumerator CreateManagersRoutine(GameObject managerContainer)
         {
             AssetManager.Create(managerContainer);
+            InputManager.CreateFromPrefab(_inputManagerPrefab.gameObject, managerContainer);
 
             PlayerManager.Create(managerContainer);
             PlayerManager.Instance.Player = _player;
+            yield return null;
 
-            InputManager.Create(managerContainer);
             UIManager.CreateFromPrefab(_uiManagerPrefab.gameObject, managerContainer);
             SceneManager.CreateFromPrefab(_sceneManagerPrefab.gameObject, managerContainer);
         }

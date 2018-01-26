@@ -193,11 +193,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114608027507646766, guid: bd67f7b47a5d3704f98b57f51f831ac2,
-        type: 2}
-      propertyPath: _enableVR
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bd67f7b47a5d3704f98b57f51f831ac2, type: 2}
   m_IsPrefabParent: 0
@@ -229,6 +224,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _eventSystemPrefab: {fileID: 1354997807243926, guid: f0d561e19979a30429e636e3dd97609f,
+    type: 2}
+  _inputManagerPrefab: {fileID: 114510398486407708, guid: 9d84f65317a99a545a784a2afc7e6584,
     type: 2}
   _uiManagerPrefab: {fileID: 114172058386529218, guid: 45eb68f222466a141adad8031ae580a3,
     type: 2}

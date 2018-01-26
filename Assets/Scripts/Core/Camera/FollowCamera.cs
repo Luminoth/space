@@ -1,4 +1,5 @@
-﻿using EnergonSoftware.Core.Math;
+﻿using EnergonSoftware.Core.Input;
+using EnergonSoftware.Core.Math;
 using EnergonSoftware.Core.Util;
 
 using JetBrains.Annotations;
@@ -93,28 +94,30 @@ namespace EnergonSoftware.Core.Camera
 
         private void HandleInput(float dt)
         {
-            Orbit(dt);
-            Zoom(dt);
-            Look(dt);
+            Vector3 pointerAxis = InputManager.Instance.GetPointerAxis();
+
+            Orbit(pointerAxis, dt);
+            Zoom(pointerAxis, dt);
+            Look(pointerAxis, dt);
         }
 
-        private void Orbit(float dt)
+        private void Orbit(Vector3 pointerAxis, float dt)
         {
-            if(!_enableOrbit || !UnityEngine.Input.GetMouseButton(0)) {
+            if(!_enableOrbit || (!PlayerManager.Instance.Player.EnableVR && !UnityEngine.Input.GetMouseButton(0))) {
                 return;
             }
 
-            _orbitRotation.x = MathHelper.WrapAngle(_orbitRotation.x + UnityEngine.Input.GetAxis("Mouse X") * _orbitSpeedX * dt);
-            _orbitRotation.y = MathHelper.WrapAngle(_orbitRotation.y - UnityEngine.Input.GetAxis("Mouse Y") * _orbitSpeedY * dt);
+            _orbitRotation.x = MathHelper.WrapAngle(_orbitRotation.x + pointerAxis.x * _orbitSpeedX * dt);
+            _orbitRotation.y = MathHelper.WrapAngle(_orbitRotation.y - pointerAxis.y * _orbitSpeedY * dt);
         }
 
-        private void Zoom(float dt)
+        private void Zoom(Vector3 pointerAxis, float dt)
         {
             if(!_enableZoom) {
                 return;
             }
 
-            float zoomAmount = UnityEngine.Input.GetAxis("Mouse ScrollWheel") * _zoomSpeed * dt * (_invertZoomDirection ? -1 : 1);
+            float zoomAmount = pointerAxis.z * _zoomSpeed * dt * (_invertZoomDirection ? -1 : 1);
 
             float minDistance = _minZoomDistance, maxDistance = _maxZoomDistance;
             if(null != Target) {
@@ -131,8 +134,12 @@ namespace EnergonSoftware.Core.Camera
             }
         }
 
-        private void Look(float dt)
+        private void Look(Vector3 pointerAxis, float dt)
         {
+            if(PlayerManager.Instance.Player.EnableVR) {
+                return;
+            }
+
             if(UnityEngine.Input.GetMouseButtonUp(1)) {
                 _lookRotation = Vector2.zero;
             }
@@ -141,8 +148,8 @@ namespace EnergonSoftware.Core.Camera
                 return;
             }
 
-            _lookRotation.x = MathHelper.WrapAngle(_lookRotation.x + UnityEngine.Input.GetAxis("Mouse X") * _lookSpeedX * dt);
-            _lookRotation.y = MathHelper.WrapAngle(_lookRotation.y - UnityEngine.Input.GetAxis("Mouse Y") * _lookSpeedY * dt);
+            _lookRotation.x = MathHelper.WrapAngle(_lookRotation.x + pointerAxis.x * _lookSpeedX * dt);
+            _lookRotation.y = MathHelper.WrapAngle(_lookRotation.y - pointerAxis.y * _lookSpeedY * dt);
         }
 
         private void FollowTarget()

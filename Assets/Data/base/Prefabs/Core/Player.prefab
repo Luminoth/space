@@ -92,6 +92,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4950379177759744}
+  - component: {fileID: 54883674222312360}
+  - component: {fileID: 65479478307155742}
   - component: {fileID: 114608027507646766}
   - component: {fileID: 114135473964769860}
   m_Layer: 0
@@ -320,6 +322,33 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1847870672345590}
   m_Mesh: {fileID: 4300000, guid: 581a0d1f069aa2d41b4112fb6b01244e, type: 3}
+--- !u!54 &54883674222312360
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1773617178476710}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!65 &65479478307155742
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1773617178476710}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!81 &81436040268625776
 AudioListener:
   m_ObjectHideFlags: 1
@@ -446,7 +475,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   raycasterEventMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 4294967291
   maxRaycastHits: 77
 --- !u!114 &114529721113744650
 MonoBehaviour:
@@ -476,7 +505,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ac704549905ca540bf4c48ff684292d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enableVR: 1
+  _enableVR: 0
   _camera: {fileID: 20272612850177068}
 --- !u!114 &114657290153752946
 MonoBehaviour:
@@ -513,7 +542,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_EventMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 4294967291
   m_MaxRayIntersections: 0
 --- !u!120 &120822581228299014
 LineRenderer:
